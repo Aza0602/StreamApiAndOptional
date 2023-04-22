@@ -56,14 +56,16 @@ public class DepartmentService {
                 .filter(employee -> employee.getDepartment() == department)
                 .max(Comparator.comparingInt(Employee::getSalary)).orElse(null);
     }
-    public Employee totalSalariesForDepartment(int department) {
+    public double totalSalariesForDepartment(int department) {
         return employeeService.getAll().stream()
                 .mapToInt(Employee::getSalary).sum();
     }
+
+
     public List<Employee> findAllEmployeesFromDepartment(int department) {
         return employeeService.getAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<Employee> getAllEmployeesFromDepartment(int department) {
