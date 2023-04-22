@@ -37,7 +37,8 @@ public class EmployeeService {
 
     public static Employee remove(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.containsKey(employee)) {
+        String key = getKey(firstName, lastName);
+        if (!employees.containsKey(key)) {
             throw new EmployeeNotFoundException();
         }
         employees.remove(employee);
@@ -46,19 +47,18 @@ public class EmployeeService {
 
     public static Employee find(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.containsKey(employees)) {
+        String key = getKey(firstName, lastName);
+        if (!employees.containsKey(key)) {
             throw new EmployeeNotFoundException();
         }
-        return employee;
+        return employees.get(key);
     }
 
-    public Collection employees() {
-
-        return Collections.unmodifiableCollection(employees());
+    public List<Employee> getAll() {
+        return new ArrayList<>(employees.values());
     }
 
-
-    public Arrays getAll() {
+    public Collection<Employee> employees() {
         return null;
     }
 }
